@@ -15,34 +15,34 @@
           href="https://ionicframework.com/docs/components">UI Components</a></p>
     </ion-grid>
     <ion-item *ngIf="token == true">
-      <ion-card>
+      <ion-card style="width: 100%;">
         <ion-card-header>
-          <ion-card-title>Card Title</ion-card-title>
+          <ion-card-title>¡Hola, {{dataBooking.EntireName}}!</ion-card-title>
         </ion-card-header>
         <ion-card-content>
           <ion-grid>
+            Continua con el pago de tu reserva por: {{dataBooking.Amount | currency:'$ ':'symbol':'.0-0'}}
             <ion-row>
-              <ion-col>
+              <ion-col size="12">
                 <ion-item>
-                  <label position="floating">Monto</label>
-                  <!-- <ion-input type="number" [(ngModel)]="monto"></ion-input> -->
-                  <ion-input type="number"></ion-input>
+                  <!-- <ion-input label="Crédito" labelPlacement="floating" type="number" [ngModelOptions]="{standalone: true}" currency="USD"></ion-input> -->
+                  <!-- <ion-input label="Crédito" labelPlacement="floating" type="number" [ngx-currency]="{ prefix: 'USD $ ', thousands: ',', decimal: '.' }"></ion-input> -->
+                  <input placeholder="$ 0" currencyMask [options]="{ precision: 0 }" />
+
                 </ion-item>
               </ion-col>
-              <ion-col>
+              <ion-col size="12">
                 <ion-item>
-                  <label position="floating">Concepto</label>
-                  <ion-input type="text"></ion-input>
+                  <!-- <label position="floating">Puntos</label> -->
+                  <ion-input label="Denarios" labelPlacement="floating" type="number"></ion-input>
                 </ion-item>
               </ion-col>
             </ion-row>
           </ion-grid>
-          Keep close to Nature's heart... and break clear away, once in awhile, and climb a mountain or spend a week in
-          the woods. Wash your spirit clean.
         </ion-card-content>
       </ion-card>
     </ion-item>
- <!--    <ion-grid *ngIf="token == true">
+    <!--    <ion-grid *ngIf="token == true">
       <ion-row>
         <ion-col>
           <ion-item>
