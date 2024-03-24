@@ -54,7 +54,8 @@ export class HomePage {
   validateAmount() {
     this.totalPayment = 0;
     this.credito ? this.totalPayment += this.credito : false;
-    this.denarios ? this.totalPayment += (this.denarios * 1000) : false;
+    /* this.denarios ? this.totalPayment += (this.denarios * 1000) : false; */
+    this.denarios ? (this.denarios > 500 ? this.totalPayment += (500 * 1000) : this.totalPayment += (this.denarios * 1000)) : false;
     this.totalPayment == this.dataBooking.Amount ? this.buttonPay = true : this.buttonPay = false;
   }
   payBooking() {
