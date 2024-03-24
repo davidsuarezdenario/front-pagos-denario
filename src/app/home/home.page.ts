@@ -13,44 +13,37 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class HomePage {
   constructor(private route: ActivatedRoute, private http: HttpClient) { }
-  headersWanderlust = { headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': 'denario2021' }) };
+  headersWanderlust = { headers: new HttpHeaders({ 'Content-Type': 'application/json', 'x-api-key': 'viajesAuth' }) };
+  urlWanderlust = 'http://localhost:3000';
   token = false;
 
   ionViewWillEnter() {
-    this.token = this.route.snapshot.params['id'] ? true : false;
+    //this.token = this.route.snapshot.params['id'] ? true : false;
+    this.route.snapshot.params['id'] ? this.requestTransactionId(this.route.snapshot.params['id']) : false;
     console.log('ionViewWillEnter: ', this.route.snapshot.params['id']);
   }
 
   async requestTransactionId(data: any) {
-    await this.processHttpRequest('post', '/transaction', { id: data }).then((res: any) => {
-      console.log(res);
-    }).catch((err: any) => {
-      console.log(err);
+    await this.processHttpRequest('post', '/travel/get_booking', { Id: data }).then((res: any) => {
+      res.error == false ? this.token = true : false;
+      //console.log(this.token);
     });
   }
   processHttpRequest(method: string, path: string, body: any) {
     return new Promise((resolve, reject) => {
       switch (method.toLowerCase()) {
         case 'get':
-          this.http.get('localhost:3000' + path, this.headersWanderlust).subscribe((res: any) => {
+          this.http.get(this.urlWanderlust + path, this.headersWanderlust).subscribe((res: any) => {
             console.log(res);
-            if (res.res == "ok") {
-              resolve(res.url);
-            } else {
-              resolve("error");
-            }
+            resolve(res);
           }, (err: any) => {
             reject({ error: true, data: err });
           });
           break;
         case 'post':
-          this.http.post('localhost:3000' + path, body, this.headersWanderlust).subscribe((res: any) => {
+          this.http.post(this.urlWanderlust + path, body, this.headersWanderlust).subscribe((res: any) => {
             console.log(res);
-            if (res.res == "ok") {
-              resolve(res.url);
-            } else {
-              resolve("error");
-            }
+            resolve(res);
           }, (err: any) => {
             reject({ error: true, data: err });
           });
