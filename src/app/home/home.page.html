@@ -11,15 +11,55 @@
   <div id="container">
     <ion-grid *ngIf="token == false">
       <strong>Ready to create an app?</strong>
-      <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+      <p>Start with Ionic <a target="_blank" rel="noopener noreferrer"
+          href="https://ionicframework.com/docs/components">UI Components</a></p>
     </ion-grid>
-    <ion-grid *ngIf="token == true">
+    <ion-item *ngIf="token == true">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Card Title</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-item>
+                  <label position="floating">Monto</label>
+                  <!-- <ion-input type="number" [(ngModel)]="monto"></ion-input> -->
+                  <ion-input type="number"></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col>
+                <ion-item>
+                  <label position="floating">Concepto</label>
+                  <ion-input type="text"></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          Keep close to Nature's heart... and break clear away, once in awhile, and climb a mountain or spend a week in
+          the woods. Wash your spirit clean.
+        </ion-card-content>
+      </ion-card>
+    </ion-item>
+ <!--    <ion-grid *ngIf="token == true">
       <ion-row>
         <ion-col>
-          <!-- <ion-button expand="block" (click)="openModal()">Open Modal</ion-button> -->
+          <ion-item>
+            <ion-card>
+              <ion-card-header>
+                <ion-card-title>Card Title</ion-card-title>
+              </ion-card-header>
+              <ion-card-content>
+                Keep close to Nature's heart... and break clear away, once in awhile, and climb a mountain or spend a
+                week in the woods. Wash your spirit clean.
+              </ion-card-content>
+            </ion-card>
+          </ion-item>
+          <ion-button expand="block" (click)="openModal()">Open Modal</ion-button>
         </ion-col>
       </ion-row>
-    </ion-grid>
+    </ion-grid> -->
   </div>
-  
+
 </ion-content>
