@@ -20,7 +20,9 @@
         </ion-card-header>
         <ion-card-content>
           <ion-grid>
-            <strong>Continua con el pago de tu reserva por: {{dataBooking.Amount | currency:'$
+            <strong *ngIf="dataBooking.RoundTrip == true">Continua con el pago de tu reserva ({{dataBooking.Departure}}-{{dataBooking.Arrival}}-{{dataBooking.Departure}}) por: {{dataBooking.Amount | currency:'$
+              ':'symbol':'.0-0'}}</strong>
+            <strong *ngIf="dataBooking.RoundTrip == false">Continua con el pago de tu reserva ({{dataBooking.Departure}}-{{dataBooking.Arrival}}) por: {{dataBooking.Amount | currency:'$
               ':'symbol':'.0-0'}}</strong>
             <ion-row>
               <ion-col>
@@ -49,9 +51,10 @@
                 </ion-item>
               </ion-col>
             </ion-row>
-            <ion-row *ngIf="buttonPay == true">
+            <ion-row>
               <ion-col size="12">
-                <ion-button expand="block" size="medium" (click)="payBooking()" color="success">Pagar</ion-button>
+                <ion-button *ngIf="buttonPay == true" expand="block" size="medium" (click)="payBooking()" color="success">Pagar</ion-button>
+                <ion-button *ngIf="buttonPay == false" expand="block" size="medium" color="success" disabled>Pagar</ion-button>
               </ion-col>
             </ion-row>
           </ion-grid>
