@@ -9,8 +9,17 @@
 <ion-content mode="ios">
 
   <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <ion-grid *ngIf="!token">
+      <strong>Ready to create an app?</strong>
+      <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    </ion-grid>
+    <ion-grid *ngIf="token">
+      <ion-row>
+        <ion-col>
+          <!-- <ion-button expand="block" (click)="openModal()">Open Modal</ion-button> -->
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </div>
   
 </ion-content>
