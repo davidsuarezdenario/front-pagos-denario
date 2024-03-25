@@ -1,13 +1,189 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>pay-booking</ion-title>
+<ion-header mode="ios">
+  <ion-toolbar mode="ios" class="ion-text-center">
+    <ion-button mode="ios" color="denuno" fill="clear" size="small" slot="start"> Atrás <ion-icon slot="start"
+        name="arrow-back"></ion-icon> </ion-button>
+    <!-- <ion-text color="denuno" mode="ios" *ngIf="api.pasoSol=='simular'">1. Simula tu crédito para solicitud de redención de Bono</ion-text> -->
+    <ion-text color="denuno" mode="ios">2. Solicitar</ion-text>
+    <!-- <ion-text color="denuno" mode="ios" *ngIf="api.pasoSol=='firmar'">3. Firmar</ion-text> -->
+    <!-- <ion-text color="denuno" mode="ios" *ngIf="api.pasoSol=='formulario'">4. Formulario</ion-text> -->
+    <ion-button slot="end" fill="clear" size="small" mode="ios"> <ion-icon slot="icon-only"
+        name="close-outline"></ion-icon> </ion-button>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">pay-booking</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col>
+        <ion-list class="box1">
+          <ion-item lines="none" style="padding: 0px; margin-top: -5px;">
+            <ion-icon slot="start" name="calendar" color="secondary"></ion-icon>
+            <ion-text slot="start" color="medium">Plazo</ion-text>
+            <!-- <ion-text slot="end" color="denuno" *ngIf="api.plazoSol==1">({{api.plazoSol}} cuota)</ion-text> 
+            <ion-text slot="end" color="denuno" *ngIf="api.plazoSol>1">({{api.plazoSol}} cuotas)</ion-text> -->
+          </ion-item>
+          <ion-item lines="none" style="padding: 0px; margin-top: -10px;">
+            <ion-select mode="ios" color="denuno" placeholder="Ingresa el plazo (cuotas)">
+              <!-- <ion-select-option *ngFor="let p of [1,2]" [value]="p">{{p}} <ion-text *ngIf="p==1">cuota</ion-text><ion-text *ngIf="p>1">cuotas</ion-text></ion-select-option> -->
+            </ion-select>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+      <img src="../../../assets/img/instructImg.png" alt="" style="margin-top: 20px;">
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid fixed class="ion-no-padding">
+    <ion-row>
+      <ion-col size="12">
+        <p class="ion-text-center" style="padding-left: 5px; padding-right: 5px;">
+          <ion-text color="denuno">
+            Revisa la oferta (Puedes dar click en el botón Atrás para volver a simular), lee y acepta términos &
+            condiciones y da click en Solicitar:
+          </ion-text>
+        </p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <ion-card mode="ios">
+          <ion-card-header mode="ios">
+            <ion-card-subtitle mode="ios" color="denuno" class="ion-text-center">Resultado</ion-card-subtitle>
+            <ion-card-title class="ion-text-center">
+              <!-- ¡Te prestamos <ion-text color="denuno">{{api.resultadoSim.MontoFin | currency:'$':'symbol':'.0-0'}}</ion-text> a <ion-text color="denuno">{{api.resultadoSim.PlazoFin}}</ion-text> <ion-text *ngIf="api.resultadoSim.PlazoFin==1"> cuota</ion-text> <ion-text *ngIf="api.resultadoSim.PlazoFin>1"> cuotas</ion-text> de <ion-text color="denuno">{{api.resultadoSim.CuotaTot | currency:'$':'symbol':'.0-0'}}</ion-text> con un interés del <ion-text color="denuno">{{api.resultadoSim.TasaMes}}% nvm</ion-text>! -->
+            </ion-card-title>
+          </ion-card-header>
+          <ion-grid fixed mode="ios" style="width: 95%; border: 2px solid lightgrey !important;border-radius: 10px;">
+            <ion-row>
+              <ion-col size="12">
+                <ion-card-subtitle mode="ios" color="denuno" class="ion-text-center">Detalle</ion-card-subtitle>
+              </ion-col>
+              <ion-col size="6">
+                <ion-list>
+                  <ion-item>
+                    <ion-label title="Tasa de interés calculada de tu convenio"
+                      style="margin-top: 2px; margin-bottom: 2px;" id="trigger_1">Interés<ion-icon color="warning"
+                        slot="icon-only" name="help-circle-outline"></ion-icon></ion-label>
+                    <!-- <ion-text color="denuno">{{api.resultadoSim.InteresTotal-api.resultadoSim.InteresGracia | currency:'$':'symbol':'.0-0'}}</ion-text> -->
+                    <ion-popover trigger="trigger_1" triggerAction="click" mode="ios">
+                      <ng-template>
+                        <ion-content class="ion-padding ion-text-center">Tasa de interés calculada de tu
+                          convenio</ion-content>
+                      </ng-template>
+                    </ion-popover>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label
+                      title="Denario App SAS, avala y respaldará tu cupo de crédito, incluye seguro de deudores"
+                      style="margin-top: 2px; margin-bottom: 2px;" id="trigger_2">Aval+Seguro+IVA<ion-icon
+                        color="warning" slot="icon-only" name="help-circle-outline"></ion-icon></ion-label>
+                    <!-- <ion-text color="denuno">{{api.resultadoSim.Seguro | currency:'$':'symbol':'.0-0'}}</ion-text> -->
+                    <ion-popover trigger="trigger_2" triggerAction="click" mode="ios">
+                      <ng-template>
+                        <ion-content class="ion-padding ion-text-center">Denario App SAS, avala y respaldará tu cupo de
+                          crédito, incluye seguro de deudores</ion-content>
+                      </ng-template>
+                    </ion-popover>
+                  </ion-item>
+                </ion-list>
+              </ion-col>
+              <ion-col size="6">
+                <ion-item>
+                  <ion-label title="Servicio de tecnología en la nube" style="margin-top: 2px; margin-bottom: 2px;"
+                    id="trigger_3">Cloud<ion-icon color="warning" slot="icon-only"
+                      name="help-circle-outline"></ion-icon></ion-label>
+                  <!-- <ion-text color="denuno">{{api.resultadoSim.Cloud | currency:'$':'symbol':'.0-0'}}</ion-text> -->
+                  <ion-popover trigger="trigger_3" triggerAction="click" mode="ios">
+                    <ng-template>
+                      <ion-content class="ion-padding ion-text-center">Servicio de tecnología en la nube</ion-content>
+                    </ng-template>
+                  </ion-popover>
+                </ion-item>
+                <ion-item>
+                  <ion-label style="margin-top: 2px; margin-bottom: 2px;">Periodo de gracia</ion-label>
+                  <!-- <ion-text color="denuno">{{api.resultadoSim.InteresGracia | currency:'$':'symbol':'.0-0'}}</ion-text> -->
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          <ion-grid fixed mode="ios"
+            style="margin-top: 10px; margin-bottom: 10px; width: 70%;border: 2px solid lightgrey !important;border-radius: 10px;">
+            <ion-row>
+              <ion-col size="12">
+                <ion-card-subtitle mode="ios" color="denuno" class="ion-text-center" mode="ios">Tus
+                  cuotas</ion-card-subtitle>
+              </ion-col>
+              <ion-col size="12" class="ion-text-center">
+                <ion-item style="margin-top: 2px; margin-bottom: 2px;">
+                  <ion-label style="font-size: small;">Cuota </ion-label><ion-text color="denuno"></ion-text>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid fixed class="ion-no-padding">
+    <ion-row>
+      <ion-col size="12">
+        <p class="ion-text-center" style="padding-left: 5px; padding-right: 5px;">
+          <ion-text color="denuno">
+            Ingresa el código de 4 digitos que enviamos al celular y el código de 5 digitos que enviamos al correo
+          </ion-text>
+        </p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <ion-card>
+          <ion-item lines="none">
+            <ion-label position="stacked" class="ion-text-wrap">Ingresa código de 4 dígitos que te enviamos al celular
+            </ion-label>
+            <ion-input type="tel" inputmode="numeric" placeholder="ingresa 4 digitos" color="denuno"
+              style="border: 2px solid lightgrey !important;border-radius: 10px; padding-left: 8px !important; font-size: larger;"
+              maxlength="4">
+              <ion-icon name="checkmark-circle" color="success" size="large"
+                style="position: absolute; top:5px; right:5px;"></ion-icon>
+            </ion-input>
+            <ion-button expand="block" fill="clear" shape="round">
+              Solicitar nuevo código al celular
+            </ion-button>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label position="stacked" class="ion-text-wrap">Ingresa código de 5 dígitos que te enviamos al correo
+            </ion-label>
+            <ion-input type="tel" inputmode="numeric" placeholder="ingresa 5 digitos" color="denuno"
+              style="border: 2px solid lightgrey !important;border-radius: 10px; padding-left: 8px !important; font-size: larger;"
+              maxlength="5">
+              <ion-icon name="checkmark-circle" color="success" size="large"
+                style="position: absolute; top:5px; right:5px;"></ion-icon>
+            </ion-input>
+            <ion-button expand="block" fill="clear" shape="round">
+              Solicitar nuevo código al correo
+            </ion-button>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
+
+<ion-footer mode="ios">
+  <ion-toolbar mode="ios" class="ion-text-center">
+    <ion-button style="font-weight: bolder;" expand="block" mode="ios" color="success">
+      Simular
+      <ion-icon slot="end" name="options-outline"></ion-icon>
+    </ion-button>
+    <ion-button fill="outline" expand="block" color="success" mode="ios" style="margin:0px;">
+      Acepto términos & condiciones
+      <ion-icon size="large" color="medium" slot="end" name="shield-outline"></ion-icon>
+      <ion-icon size="large" color="success" slot="end" name="shield-checkmark-outline"></ion-icon>
+    </ion-button>
+    <ion-button style="font-weight: bolder;" expand="block" mode="ios" color="success">
+      Solicitar
+      <ion-icon slot="end" name="rocket-outline"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>
