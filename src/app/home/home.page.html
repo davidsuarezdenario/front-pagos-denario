@@ -16,7 +16,7 @@
     <ion-item *ngIf="token == true" lines="none">
       <ion-card style="width: 100%;">
         <ion-card-header>
-          <ion-card-title>¡Hola, {{dataBooking.EntireName}}!</ion-card-title>
+          <ion-card-title class="sizeTitle">¡Hola, {{dataBooking.EntireName}}!</ion-card-title>
         </ion-card-header>
         <ion-card-content>
           <ion-grid>
@@ -25,23 +25,23 @@
             <ion-row>
               <ion-col>
                 <ion-item>
-                    <label style="width: 50%;">Crédito ({{this.dataBooking.cupo | currency:'$ ':'symbol':'.0-0'}})</label>
-                    <input style="width: 50%;" [(ngModel)]="credito" placeholder="$ 0" currencyMask [options]="{ precision: 0 }" (keyup)="validateAmount()" />
+                    <label style="width: 40%;">Crédito<br>({{this.dataBooking.cupo | currency:'$ ':'symbol':'.0-0'}})</label>
+                    <input style="width: 60%;" [(ngModel)]="credito" placeholder="$ 0" currencyMask [options]="{ precision: 0 }" (keyup)="validateAmount()" />
                 </ion-item>
               </ion-col>
             </ion-row>
             <ion-row>
               <ion-col size="12">
                 <ion-item>
-                  <label style="width: 50%;">Denarios ({{this.dataBooking.puntos | currency:'Den ':'symbol':'.0-0'}})</label><br>
-                  <input style="width: 50%;" [(ngModel)]="denarios" placeholder="Den 0" currencyMask [options]="{ prefix: 'Den ', precision: 0 }" (keyup)="validateAmount()" />
+                  <label style="width: 40%;">Denarios<br>({{this.dataBooking.puntos | currency:'Den ':'symbol':'.0-0'}})</label><br>
+                  <input style="width: 60%;" [(ngModel)]="denarios" placeholder="Den 0" currencyMask [options]="{ prefix: 'Den ', precision: 0 }" (keyup)="validateAmount()" />
                 </ion-item>
               </ion-col>
             </ion-row>
             <ion-row>
               <ion-col size="12">
                 <ion-item>
-                  <b>Total</b>
+                  <label><b>Total</b></label>
                   <input [(ngModel)]="totalPayment" placeholder="$ 0" currencyMask [options]="{ precision: 0 }" disabled />
                 </ion-item>
               </ion-col>

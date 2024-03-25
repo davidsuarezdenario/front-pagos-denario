@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { CommonModule, DatePipe, CurrencyPipe } from '@angular/common';
 import { CurrencyMaskModule } from "ng2-currency-mask";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonGrid, IonRow, IonCol, IonItem, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonText, IonLabel, IonInput, IonButton } from '@ionic/angular/standalone';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonGrid, IonRow, IonCol, IonItem, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonText, IonLabel, IonInput, IonButton, ModalController } from '@ionic/angular/standalone';
 import { ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { PayBookingPage } from '../components/pay-booking/pay-booking.page'
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,7 @@ import { FormsModule } from '@angular/forms';
   imports: [CommonModule, DatePipe, CurrencyPipe, CurrencyMaskModule, IonHeader, IonToolbar, IonTitle, IonContent, IonGrid, IonRow, IonCol, IonItem, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonText, IonLabel, IonInput, IonButton, FormsModule]
 })
 export class HomePage {
-  constructor(private route: ActivatedRoute, private http: HttpClient) { }
+  constructor(private route: ActivatedRoute, private http: HttpClient, public modalController: ModalController) { }
   headersWanderlust = { headers: new HttpHeaders({ 'Content-Type': 'application/json', 'x-api-key': 'viajesAuth' }) }; urlWanderlust = 'http://localhost:3000';
   token = false; buttonPay = false; dataBooking: any = {}; credito = undefined; denarios = undefined; totalPayment = 0;
 
@@ -57,7 +58,9 @@ export class HomePage {
     this.denarios ? (this.denarios > this.dataBooking.puntos ? this.totalPayment += (this.dataBooking.puntos * 1000) : this.totalPayment += (this.denarios * 1000)) : false;
     this.totalPayment == this.dataBooking.Amount ? this.buttonPay = true : this.buttonPay = false;
   }
-  payBooking() {
+  async payBooking() {
     console.log('Paying booking...');
+    const modal = await this.modalController.create({ component: PayBookingPage, mode: 'ios', cssClass: 'popoverStyle', });
+    return await modal.present();
   }
 }

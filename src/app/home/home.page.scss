@@ -33,3 +33,23 @@ input :focus {
   outline: none;
   border: none;
 }
+
+@media screen and (max-width: 768px) {
+
+  input,
+  input :hover,
+  input :focus,
+  label,
+  ion-button {
+    font-size: 0.85rem;
+  }
+
+  #container strong {
+    font-size: 1.1rem;
+  }
+
+  .sizeTitle {
+    font-size: 1.4rem;
+  }
+
+}
