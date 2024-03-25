@@ -9,7 +9,7 @@ export class BookingService {
 
   constructor(private http: HttpClient) { }
   headersWanderlust = { headers: new HttpHeaders({ 'Content-Type': 'application/json', 'x-api-key': 'viajesAuth' }) }; urlWanderlust = 'http://localhost:3000';
-  bookingId = 0; document = '0'; credito = undefined; denarios = undefined; totalPayment = 0; 
+  bookingId = 0; document = '0'; credito = 0; denarios = 0; totalPayment = 0; 
 
   async get(url: string) {
     const headers = this.headersWanderlust.headers;
