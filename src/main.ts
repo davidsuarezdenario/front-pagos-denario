@@ -11,6 +11,7 @@ import { IonicModule } from '@ionic/angular';
 
 if (environment.production) {
   enableProdMode();
+  /* window.console.log = () => { }; */
 }
 
 bootstrapApplication(AppComponent, {
