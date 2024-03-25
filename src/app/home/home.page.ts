@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { CommonModule, DatePipe, CurrencyPipe } from '@angular/common';
 import { CurrencyMaskModule } from "ng2-currency-mask";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { BookingService } from '../services/booking.service';
 import { IonHeader, IonToolbar, IonTitle, IonContent, IonGrid, IonRow, IonCol, IonItem, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonText, IonLabel, IonInput, IonButton, ModalController } from '@ionic/angular/standalone';
 import { ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { PayBookingPage } from '../components/pay-booking/pay-booking.page'
+import { PayBookingPage } from '../components/pay-booking/pay-booking.page';
+
 
 @Component({
   selector: 'app-home',
@@ -15,8 +16,8 @@ import { PayBookingPage } from '../components/pay-booking/pay-booking.page'
   imports: [CommonModule, DatePipe, CurrencyPipe, CurrencyMaskModule, IonHeader, IonToolbar, IonTitle, IonContent, IonGrid, IonRow, IonCol, IonItem, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonText, IonLabel, IonInput, IonButton, FormsModule]
 })
 export class HomePage {
-  constructor(private route: ActivatedRoute, private http: HttpClient, public modalController: ModalController) { }
-  headersWanderlust = { headers: new HttpHeaders({ 'Content-Type': 'application/json', 'x-api-key': 'viajesAuth' }) }; urlWanderlust = 'http://localhost:3000';
+  constructor(private booking: BookingService, private route: ActivatedRoute, public modalController: ModalController) { }
+  /* headersWanderlust = { headers: new HttpHeaders({ 'Content-Type': 'application/json', 'x-api-key': 'viajesAuth' }) }; urlWanderlust = 'http://localhost:3000'; */
   token = false; buttonPay = false; dataBooking: any = {}; credito = undefined; denarios = undefined; totalPayment = 0;
 
   ionViewWillEnter() {
@@ -24,11 +25,12 @@ export class HomePage {
   }
 
   async requestTransactionId(data: any) {
-    await this.processHttpRequest('post', '/travel/get_booking', { Id: data }).then((res: any) => {
+    /* await this.booking.processHttpRequest('post', '/travel/get_booking', { Id: data }).then((res: any) => { */
+    await this.booking.post('/travel/get_booking', { Id: data }).then((res: any) => {
       if (res.error == false) { this.token = true, this.dataBooking = res.data; }
     });
   }
-  processHttpRequest(method: string, path: string, body: any) {
+  /* processHttpRequest(method: string, path: string, body: any) {
     return new Promise((resolve, reject) => {
       switch (method.toLowerCase()) {
         case 'get':
@@ -51,7 +53,7 @@ export class HomePage {
           break;
       }
     });
-  }
+  } */
   validateAmount() {
     this.totalPayment = 0;
     this.credito ? (this.credito > this.dataBooking.cupo ? this.totalPayment += this.dataBooking.cupo : this.totalPayment += this.credito) : false;
