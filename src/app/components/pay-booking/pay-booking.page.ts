@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { BookingService } from 'src/app/services/booking.service';
+import { TycPage } from '../tyc/tyc.page';
 
 @Component({
   selector: 'app-pay-booking',
@@ -30,12 +31,21 @@ export class PayBookingPage implements OnInit {
   }
   counter(i: number) { return new Array(i); }
   firmar() {
-    if(this.booking.credito > 0){
-      console.log('Firmar credito...');
-      this.revision = true;
+    if(this.booking.termCond == true){
+      if(this.booking.credito > 0){
+        console.log('Firmar credito...');
+        this.revision = true;
+      } else {
+        console.log('Firmar denarios... proceder a pagar');
+      }
     } else {
-      console.log('Firmar denarios... proceder a pagar');
+      this.booking.presentAlert('Alerta!', 'Al solicitar', 'Para solicitar tu crédito debes leer y aceptar Términos & Condiciones.');
     }
 
+  }
+  async termCondConfirm() {
+    console.log('TermCondConfirm...');
+    const modal = await this.booking.modalController.create({ component: TycPage, mode: "ios", cssClass: 'popoverStyle' });
+    return await modal.present();
   }
 }

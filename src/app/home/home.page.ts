@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule, DatePipe, CurrencyPipe } from '@angular/common';
 import { CurrencyMaskModule } from "ng2-currency-mask";
 import { BookingService } from '../services/booking.service';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonGrid, IonRow, IonCol, IonItem, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonText, IonLabel, IonInput, IonButton, ModalController } from '@ionic/angular/standalone';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonGrid, IonRow, IonCol, IonItem, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonText, IonLabel, IonInput, IonButton } from '@ionic/angular/standalone';
 import { ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { PayBookingPage } from '../components/pay-booking/pay-booking.page';
@@ -16,7 +16,7 @@ import { PayBookingPage } from '../components/pay-booking/pay-booking.page';
   imports: [CommonModule, DatePipe, CurrencyPipe, CurrencyMaskModule, IonHeader, IonToolbar, IonTitle, IonContent, IonGrid, IonRow, IonCol, IonItem, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonText, IonLabel, IonInput, IonButton, FormsModule]
 })
 export class HomePage {
-  constructor(private booking: BookingService, private route: ActivatedRoute, private modalController: ModalController) { }
+  constructor(private booking: BookingService, private route: ActivatedRoute) { }
   token = false; buttonPay = false; dataBooking: any = {}; credito = undefined; denarios = undefined; totalPayment = 0;
 
   ionViewWillEnter() {
@@ -40,7 +40,7 @@ export class HomePage {
     this.booking.credito = this.credito ? (this.credito > this.dataBooking.cupo ? this.dataBooking.cupo : this.credito) : 0;
     this.booking.denarios = this.denarios ? (this.denarios > this.dataBooking.puntos ? this.dataBooking.puntos : this.denarios) : 0;
     this.booking.totalPayment = this.totalPayment; this.booking.document = this.dataBooking.Document; this.booking.bookingId = this.dataBooking.Id;
-    const modal = await this.modalController.create({ component: PayBookingPage, mode: 'ios', cssClass: 'popoverStyle', });
+    const modal = await this.booking.modalController.create({ component: PayBookingPage, mode: 'ios', cssClass: 'popoverStyle' });
     return await modal.present();
   }
 }
