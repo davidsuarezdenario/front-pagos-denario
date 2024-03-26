@@ -6,8 +6,7 @@
     <ion-text color="denuno" mode="ios">Resumen de Pago</ion-text>
     <!-- <ion-text color="denuno" mode="ios" *ngIf="api.pasoSol=='firmar'">3. Firmar</ion-text> -->
     <!-- <ion-text color="denuno" mode="ios" *ngIf="api.pasoSol=='formulario'">4. Formulario</ion-text> -->
-    <ion-button slot="end" fill="clear" size="small" mode="ios"> <ion-icon
-        name="close-outline"></ion-icon> </ion-button>
+    <ion-button slot="end" fill="clear" size="small" mode="ios"><ion-icon color="warning" slot="icon-only" name="close-circle-outline"></ion-icon></ion-button>
   </ion-toolbar>
 </ion-header>
 
@@ -159,8 +158,8 @@
     </ion-button> -->
     <ion-button (click)="termCondConfirm()" fill="outline" expand="block" color="success" mode="ios" style="margin:0px;" *ngIf="revision == false">
       Acepto términos & condiciones
-      <!-- <ion-icon size="large" color="medium" slot="end" name="shield-outline"></ion-icon>
-      <ion-icon size="large" color="success" slot="end" name="shield-checkmark-outline"></ion-icon> -->
+      <ion-icon *ngIf="!booking.termCond" size="large" color="medium" slot="end" name="shield-outline"></ion-icon>
+      <ion-icon *ngIf="booking.termCond" size="large" color="success" slot="end" name="shield-checkmark-outline"></ion-icon>
     </ion-button>
     <ion-button (click)="firmar()" style="font-weight: bolder;" expand="block" mode="ios" color="success" *ngIf="revision == false">
       Solicitar

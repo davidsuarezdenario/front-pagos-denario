@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { BookingService } from 'src/app/services/booking.service';
+import { addIcons } from 'ionicons'; 
+import { closeCircleOutline } from "ionicons/icons";
 
 @Component({
   selector: 'app-tyc',
@@ -13,7 +15,7 @@ import { BookingService } from 'src/app/services/booking.service';
 })
 export class TycPage implements OnInit {
 
-  constructor(public booking: BookingService) { }
+  constructor(public booking: BookingService) { addIcons({ closeCircleOutline }); }
 
   ngOnInit() {
   }

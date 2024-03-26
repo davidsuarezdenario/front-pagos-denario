@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { IonHeader, IonToolbar, IonTitle, IonContent, IonGrid, IonRow, IonCol, IonItem, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonText, IonLabel, IonInput, IonButton, IonIcon, IonCardSubtitle, IonList, IonPopover, IonFooter } from '@ionic/angular/standalone';
 import { BookingService } from 'src/app/services/booking.service';
 import { TycPage } from '../tyc/tyc.page';
+import { addIcons } from 'ionicons'; 
+import { closeCircleOutline, shieldOutline, shieldCheckmarkOutline, helpCircleOutline } from "ionicons/icons";
 
 @Component({
   selector: 'app-pay-booking',
@@ -13,7 +15,7 @@ import { TycPage } from '../tyc/tyc.page';
   imports: [CommonModule, FormsModule,IonHeader, IonToolbar, IonTitle, IonContent, IonGrid, IonRow, IonCol, IonItem, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonText, IonLabel, IonInput, IonButton, IonIcon, IonCardSubtitle, IonList, IonPopover, IonFooter]
 })
 export class PayBookingPage implements OnInit {
-  constructor(public booking: BookingService) { }
+  constructor(public booking: BookingService) { addIcons({ closeCircleOutline, shieldOutline, shieldCheckmarkOutline, helpCircleOutline}); }
   resultSimulate: any = undefined; revision = false; details = false;
 
   ngOnInit() {
